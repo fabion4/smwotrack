@@ -1,24 +1,43 @@
-SPDX-License-Identifier: CC-BY-4.0
 Creative Commons Attribution 4.0 International (CC BY 4.0)
 
-Copyright (c) 2026 FC
+Copyright (c) 2026 FC — Smart Working Tracker
+https://github.com/fabion4/smwotrack
 
-You are free to:
+=======================================================================
+  ATTRIBUTION REQUIREMENT — PLEASE READ
+=======================================================================
+
+This work is licensed under the Creative Commons Attribution 4.0
+International License. You are free to:
 
   Share — copy and redistribute the material in any medium or format
-  Adapt — remix, transform, and build upon the material for any purpose,
-          even commercially.
+  Adapt — remix, transform, and build upon the material for any
+          purpose, even commercially.
 
 Under the following terms:
 
-  Attribution — You must give appropriate credit to FC, provide a link
-  to the license, and indicate if changes were made. You may do so in
-  any reasonable manner, but not in any way that suggests the licensor
-  endorses you or your use.
+  Attribution — You MUST give appropriate credit to the original
+  author (FC), provide a link to this original repository, and
+  indicate if changes were made.
+
+  This applies to ALL derivative works, including heavily modified
+  versions. Even if you rewrite the entire codebase, if your work
+  is based on or inspired by this project, you must credit the
+  original.
+
+  Suggested attribution format:
+
+    "Based on Smart Working Tracker by FC"
+    or
+    "Derived from Smart Working Tracker (https://github.com/fabion4/smwotrack) by FC"
 
   No additional restrictions — You may not apply legal terms or
   technological measures that legally restrict others from doing
   anything the license permits.
 
+=======================================================================
+
 Full license text:
 https://creativecommons.org/licenses/by/4.0/legalcode
+
+SPDX-License-Identifier: CC-BY-4.0
