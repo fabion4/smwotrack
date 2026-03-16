@@ -15,8 +15,11 @@
     --text: #1e1e1e;
     --text-muted: #7a7a7a;
     --border: #d8dae2;
-    --checked-bg: #0C21AB;
-    --checked-text: #ffffff;
+    --sw-bg: #0C21AB;
+    --sw-text: #ffffff;
+    --ferie-bg: #E8590C;
+    --ferie-text: #ffffff;
+    --ferie-light: #fff1eb;
     --holiday-bg: #fef3e2;
     --holiday-text: #b8860b;
     --holiday-border: #f0d89a;
@@ -28,9 +31,6 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-<script data-goatcounter="https://fc-smartworking.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
 
   body {
     font-family: 'DM Sans', sans-serif;
@@ -82,29 +82,37 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 24px;
+    gap: 20px;
     flex-wrap: wrap;
+  }
+  .counter-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
   }
   .counter-item {
     display: flex;
     align-items: baseline;
-    gap: 6px;
+    gap: 5px;
   }
   .counter-item .num {
     font-family: 'Playfair Display', serif;
     font-weight: 800;
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--accent);
     line-height: 1;
-    min-width: 30px;
+    min-width: 24px;
     text-align: right;
   }
+  .counter-item .num.ferie-color {
+    color: var(--ferie-bg);
+  }
   .counter-item .label {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     color: var(--text-muted);
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.5px;
   }
   .separator {
     width: 1px;
@@ -115,20 +123,20 @@
   .max-input-wrap {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
   }
   .max-input-wrap .label {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     color: var(--text-muted);
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.5px;
   }
   .max-input-wrap input {
-    width: 58px;
+    width: 52px;
     font-family: 'Playfair Display', serif;
     font-weight: 800;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: var(--accent);
     text-align: center;
     border: 2px solid var(--border);
@@ -138,6 +146,9 @@
     outline: none;
     transition: border-color 0.2s;
   }
+  .max-input-wrap input.ferie-input {
+    color: var(--ferie-bg);
+  }
   .max-input-wrap input:focus {
     border-color: var(--accent);
   }
@@ -145,14 +156,19 @@
   .residual-badge {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 4px 14px;
+    gap: 3px;
+    padding: 3px 12px;
     border-radius: 20px;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     background: var(--accent-light);
     color: var(--accent);
     transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .residual-badge.ferie-badge {
+    background: var(--ferie-light);
+    color: var(--ferie-bg);
   }
   .residual-badge.negative {
     background: var(--red-light);
@@ -237,13 +253,23 @@
     font-weight: 700;
     font-size: 1.5rem;
   }
+  .month-badges {
+    display: flex;
+    gap: 6px;
+  }
   .month-header .month-count {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .month-count.sw-count {
     color: var(--accent);
     background: var(--accent-light);
-    padding: 3px 10px;
-    border-radius: 20px;
+  }
+  .month-count.ferie-count {
+    color: var(--ferie-bg);
+    background: var(--ferie-light);
   }
 
   .weekday-header {
@@ -277,14 +303,7 @@
   }
   .day-cell.empty { pointer-events: none; }
 
-  .day-cell input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  .day-cell label {
+  .day-btn {
     width: 100%;
     height: 100%;
     display: flex;
@@ -299,39 +318,61 @@
     background: var(--bg);
     border: 2px solid transparent;
     user-select: none;
+    position: relative;
+    font-family: 'DM Sans', sans-serif;
   }
-  .day-cell label:hover {
+  .day-btn:hover {
     border-color: var(--accent);
     transform: scale(1.06);
   }
-  .day-cell input:checked + label {
-    background: var(--checked-bg);
-    color: var(--checked-text);
-    border-color: var(--checked-bg);
+
+  /* State: Smart Working */
+  .day-btn[data-state="1"] {
+    background: var(--sw-bg);
+    color: var(--sw-text);
+    border-color: var(--sw-bg);
     box-shadow: 0 2px 8px rgba(12,33,171,0.3);
   }
-  .day-cell input:checked + label::after {
-    content: '\2713';
+  .day-btn[data-state="1"]::after {
+    content: 'SW';
     position: absolute;
-    top: 3px;
+    top: 2px;
+    right: 4px;
+    font-size: 0.45rem;
+    font-weight: 700;
+    opacity: 0.7;
+    letter-spacing: 0.5px;
+  }
+
+  /* State: Ferie */
+  .day-btn[data-state="2"] {
+    background: var(--ferie-bg);
+    color: var(--ferie-text);
+    border-color: var(--ferie-bg);
+    box-shadow: 0 2px 8px rgba(232,89,12,0.3);
+  }
+  .day-btn[data-state="2"]::after {
+    content: 'F';
+    position: absolute;
+    top: 2px;
     right: 5px;
-    font-size: 0.55rem;
+    font-size: 0.5rem;
+    font-weight: 700;
     opacity: 0.7;
   }
 
   /* ── HOLIDAY CELL ── */
-  .day-cell.holiday label {
+  .day-cell.holiday .day-btn {
     background: var(--holiday-bg);
     color: var(--holiday-text);
     border: 2px dashed var(--holiday-border);
     cursor: default;
     font-size: 0.82rem;
   }
-  .day-cell.holiday label:hover {
+  .day-cell.holiday .day-btn:hover {
     border-color: var(--holiday-border);
     transform: none;
   }
-  .day-cell.holiday input { pointer-events: none; }
 
   /* ── LEGEND ── */
   .legend {
@@ -356,7 +397,8 @@
     border-radius: 5px;
   }
   .swatch-available { background: var(--bg); border: 2px solid var(--border); }
-  .swatch-checked { background: var(--checked-bg); }
+  .swatch-sw { background: var(--sw-bg); }
+  .swatch-ferie { background: var(--ferie-bg); }
   .swatch-holiday { background: var(--holiday-bg); border: 2px dashed var(--holiday-border); }
 
   .toast {
@@ -399,6 +441,7 @@
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     overflow: hidden;
+    margin-bottom: 10px;
   }
   .instructions summary {
     padding: 16px 22px;
@@ -468,32 +511,56 @@
 
 <header>
   <h1>Smart Working Tracker</h1>
-  <p>Marzo – Giugno 2026</p>
+  <p>Marzo – Giugno 2026 &nbsp;·&nbsp; click per ciclare: vuoto → SW → Ferie → vuoto</p>
 </header>
 
+<!-- ═══════════════════════════════════════════════════
+     BARRA CONTATORI
+     ═══════════════════════════════════════════════════ -->
 <div class="counter-bar">
-  <div class="counter-item">
-    <span class="num" id="totalCount">0</span>
-    <span class="label">Giornate SW</span>
+  <!-- SW -->
+  <div class="counter-group">
+    <div class="counter-item">
+      <span class="num" id="swCount">0</span>
+      <span class="label">SW</span>
+    </div>
+    <div class="max-input-wrap">
+      <input type="number" id="maxSW" value="40" min="0" max="999" oninput="updateCount()">
+      <span class="label">Max</span>
+    </div>
+    <span class="residual-badge" id="swResidualBadge">
+      <span id="swResidual">40</span>&nbsp;residui
+    </span>
   </div>
+
   <div class="separator"></div>
+
+  <!-- FERIE -->
+  <div class="counter-group">
+    <div class="counter-item">
+      <span class="num ferie-color" id="ferieCount">0</span>
+      <span class="label">Ferie</span>
+    </div>
+    <div class="max-input-wrap">
+      <input type="number" id="maxFerie" value="26" min="0" max="999" class="ferie-input" oninput="updateCount()">
+      <span class="label">Max</span>
+    </div>
+    <span class="residual-badge ferie-badge" id="ferieResidualBadge">
+      <span id="ferieResidual">26</span>&nbsp;residue
+    </span>
+  </div>
+
+  <div class="separator"></div>
+
   <div class="counter-item">
     <span class="num" id="totalWorkdays">0</span>
-    <span class="label">Giorni lavorativi</span>
-  </div>
-  <div class="separator"></div>
-  <div class="max-input-wrap">
-    <input type="number" id="maxDays" value="40" min="0" max="999" oninput="updateCount()">
-    <span class="label">Max SW</span>
-  </div>
-  <div class="separator"></div>
-  <div class="counter-item">
-    <span class="residual-badge" id="residualBadge">
-      <span id="residualCount">40</span>&nbsp;residui
-    </span>
+    <span class="label">Gg. lavorativi</span>
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════
+     TOOLBAR
+     ═══════════════════════════════════════════════════ -->
 <div class="toolbar">
   <button class="btn btn-primary" onclick="saveCSV()">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
@@ -510,20 +577,39 @@
   <input type="file" id="csvInput" accept=".csv" onchange="loadCSV(event)">
 </div>
 
+<!-- ═══════════════════════════════════════════════════
+     LEGENDA
+     ═══════════════════════════════════════════════════ -->
 <div class="legend">
   <div class="legend-item"><div class="legend-swatch swatch-available"></div> Disponibile</div>
-  <div class="legend-item"><div class="legend-swatch swatch-checked"></div> Smart Working</div>
+  <div class="legend-item"><div class="legend-swatch swatch-sw"></div> Smart Working</div>
+  <div class="legend-item"><div class="legend-swatch swatch-ferie"></div> Ferie</div>
   <div class="legend-item"><div class="legend-swatch swatch-holiday"></div> Festivo</div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════
+     CALENDARIO
+     ═══════════════════════════════════════════════════ -->
 <div class="months-container" id="calendar"></div>
 
+<!-- ═══════════════════════════════════════════════════
+     ISTRUZIONI
+     ═══════════════════════════════════════════════════ -->
 <div class="instructions">
+  <details>
+    <summary>Come usare il tracker</summary>
+    <div class="content">
+      <p><strong>Click singolo</strong> su un giorno per ciclare tra i 3 stati:</p>
+      <p>◻️ Vuoto → 🟦 <strong>Smart Working</strong> → 🟧 <strong>Ferie</strong> → ◻️ Vuoto</p>
+      <p>I contatori in alto si aggiornano automaticamente. Imposta i massimali SW e Ferie nei campi editabili. Il badge "residui" diventa <span style="color:var(--red);font-weight:700;">rosso</span> quando superi il limite.</p>
+      <p>Usa <strong>Salva CSV</strong> per esportare e <strong>Carica CSV</strong> per ripristinare i dati.</p>
+    </div>
+  </details>
   <details>
     <summary>Come modificare i giorni festivi nel codice HTML</summary>
     <div class="content">
-      <p>Apri questo file con un editor di testo (Notepad, VS Code, ecc.) e cerca <code>const HOLIDAYS</code> nel blocco <code>&lt;script&gt;</code>. Troverai:</p>
-      <pre><span class="cm">// Formato chiave: 'YYYY-MM-GG'  valore: 'Nome festività'</span>
+      <p>Apri questo file con un editor di testo e cerca <code>const HOLIDAYS</code> nel blocco <code>&lt;script&gt;</code>:</p>
+      <pre><span class="cm">// Formato: 'YYYY-MM-GG': 'Nome festività'</span>
 const HOLIDAYS = {
   <span class="st">'2026-04-06'</span>: <span class="st">'Lunedì dell\'Angelo'</span>,
   <span class="st">'2026-04-25'</span>: <span class="st">'Festa della Liberazione'</span>,
@@ -531,16 +617,12 @@ const HOLIDAYS = {
   <span class="st">'2026-06-02'</span>: <span class="st">'Festa della Repubblica'</span>,
   <span class="cm">// '2026-06-24': 'San Giovanni (Torino)',</span>
 };</pre>
-      <p><strong>Aggiungere un festivo</strong> — inserisci una riga con data <code>'YYYY-MM-GG'</code> e nome tra apici, seguita da virgola.</p>
-      <p><strong>Rimuovere un festivo</strong> — cancella la riga oppure anteponile <code>//</code> per commentarla.</p>
-      <p><strong>Nota:</strong> i festivi che cadono di sabato o domenica vengono ignorati automaticamente.</p>
+      <p><strong>Aggiungere:</strong> nuova riga con data e nome, seguita da virgola.</p>
+      <p><strong>Rimuovere:</strong> cancella la riga o anteponile <code>//</code>.</p>
     </div>
   </details>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     FOOTER LICENZA
-     ═══════════════════════════════════════════════════ -->
 <footer class="license-footer">
   <p>
     <span class="cc-icons">
@@ -548,9 +630,9 @@ const HOLIDAYS = {
       <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="BY">
     </span>
     Smart Working Tracker &copy; 2026 <strong>FC</strong> &mdash;
-    Licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">Creative Commons Attribution 4.0 International (CC BY 4.0)</a>.
+    Licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a>.
+    Uso, modifica e ridistribuzione liberi con obbligo di citazione dell'autore.
   </p>
-  <p>Puoi usare, modificare e ridistribuire liberamente, anche a fini commerciali, a condizione di citare l'autore originale.</p>
 </footer>
 
 <div class="toast" id="toast"></div>
@@ -570,6 +652,11 @@ const HOLIDAYS = {
   // '2026-06-29': 'Santi Pietro e Paolo (Roma)',
   // '2026-12-07': 'Sant\'Ambrogio (Milano)',
 };
+
+// Stati: 0 = vuoto, 1 = Smart Working, 2 = Ferie
+const STATE_EMPTY = 0;
+const STATE_SW = 1;
+const STATE_FERIE = 2;
 
 const MONTHS = [
   { name: 'Marzo',  year: 2026, month: 2 },
@@ -602,6 +689,16 @@ function getWorkingDays(year, month) {
   return days;
 }
 
+/* ── Cycle state on click ── */
+function cycleState(key) {
+  const btn = document.getElementById(key);
+  if (!btn) return;
+  let state = parseInt(btn.dataset.state) || 0;
+  state = (state + 1) % 3;
+  btn.dataset.state = state;
+  updateCount();
+}
+
 function buildCalendar() {
   const container = document.getElementById('calendar');
   container.innerHTML = '';
@@ -616,7 +713,10 @@ function buildCalendar() {
     card.innerHTML = `
       <div class="month-header">
         <h2>${m.name} ${m.year}</h2>
-        <span class="month-count" id="mc-${m.month}">0 / ${checkableDays}</span>
+        <div class="month-badges">
+          <span class="month-count sw-count" id="mc-sw-${m.month}">SW 0</span>
+          <span class="month-count ferie-count" id="mc-fe-${m.month}">F 0</span>
+        </div>
       </div>
       <div class="weekday-header">
         ${WEEKDAYS.map(w => `<span>${w}</span>`).join('')}
@@ -648,9 +748,9 @@ function buildCalendar() {
 
       if (isHoliday(key)) {
         cell.classList.add('holiday');
-        cell.innerHTML = `<input type="checkbox" id="${key}" disabled><label for="${key}" title="${HOLIDAYS[key]}">${d}</label>`;
+        cell.innerHTML = `<div class="day-btn" title="${HOLIDAYS[key]}">${d}</div>`;
       } else {
-        cell.innerHTML = `<input type="checkbox" id="${key}" onchange="updateCount()"><label for="${key}">${d}</label>`;
+        cell.innerHTML = `<div class="day-btn" id="${key}" data-state="0" onclick="cycleState('${key}')">${d}</div>`;
       }
       grid.appendChild(cell);
 
@@ -675,56 +775,79 @@ function buildCalendar() {
 }
 
 function updateCount() {
-  let total = 0;
+  let totalSW = 0;
+  let totalFerie = 0;
   let totalWorkdays = 0;
 
   MONTHS.forEach(m => {
     const workDays = getWorkingDays(m.year, m.month);
     const checkable = workDays.filter(d => !d.holiday);
     totalWorkdays += checkable.length;
-    let monthCount = 0;
+    let monthSW = 0;
+    let monthFerie = 0;
 
     checkable.forEach(wd => {
       const key = dateKey(m.year, m.month, wd.day);
-      const cb = document.getElementById(key);
-      if (cb && cb.checked) monthCount++;
+      const btn = document.getElementById(key);
+      if (!btn) return;
+      const state = parseInt(btn.dataset.state) || 0;
+      if (state === STATE_SW) monthSW++;
+      if (state === STATE_FERIE) monthFerie++;
     });
 
-    total += monthCount;
-    const badge = document.getElementById(`mc-${m.month}`);
-    if (badge) badge.textContent = `${monthCount} / ${checkable.length}`;
+    totalSW += monthSW;
+    totalFerie += monthFerie;
+
+    const badgeSW = document.getElementById(`mc-sw-${m.month}`);
+    const badgeFE = document.getElementById(`mc-fe-${m.month}`);
+    if (badgeSW) badgeSW.textContent = `SW ${monthSW}`;
+    if (badgeFE) badgeFE.textContent = `F ${monthFerie}`;
   });
 
-  document.getElementById('totalCount').textContent = total;
+  document.getElementById('swCount').textContent = totalSW;
+  document.getElementById('ferieCount').textContent = totalFerie;
   document.getElementById('totalWorkdays').textContent = totalWorkdays;
 
-  const maxDays = parseInt(document.getElementById('maxDays').value) || 0;
-  const residual = maxDays - total;
-  const residualEl = document.getElementById('residualCount');
-  const badgeEl = document.getElementById('residualBadge');
-  residualEl.textContent = residual;
+  // SW residual
+  const maxSW = parseInt(document.getElementById('maxSW').value) || 0;
+  const swResidual = maxSW - totalSW;
+  document.getElementById('swResidual').textContent = swResidual;
+  const swBadge = document.getElementById('swResidualBadge');
+  swBadge.classList.toggle('negative', swResidual < 0);
 
-  if (residual < 0) {
-    badgeEl.classList.add('negative');
+  // Ferie residual
+  const maxFerie = parseInt(document.getElementById('maxFerie').value) || 0;
+  const ferieResidual = maxFerie - totalFerie;
+  document.getElementById('ferieResidual').textContent = ferieResidual;
+  const ferieBadge = document.getElementById('ferieResidualBadge');
+  if (ferieResidual < 0) {
+    ferieBadge.classList.add('negative');
+    ferieBadge.classList.remove('ferie-badge');
   } else {
-    badgeEl.classList.remove('negative');
+    ferieBadge.classList.remove('negative');
+    ferieBadge.classList.add('ferie-badge');
   }
 }
 
+/* ═══════════════════════════════════════════════════════
+   CSV SAVE
+   ═══════════════════════════════════════════════════════ */
 async function saveCSV() {
-  const maxVal = document.getElementById('maxDays').value;
+  const maxSW = document.getElementById('maxSW').value;
+  const maxFerie = document.getElementById('maxFerie').value;
   const giorni = ['', 'Lunedi', 'Martedi', 'Mercoledi', 'Giovedi', 'Venerdi'];
+  const stati = ['', 'SW', 'Ferie'];
 
-  let csv = `#MaxSW=${maxVal}\nData,Giorno,SmartWorking\n`;
+  let csv = `#MaxSW=${maxSW}\n#MaxFerie=${maxFerie}\nData,Giorno,Stato\n`;
 
   MONTHS.forEach(m => {
     const workDays = getWorkingDays(m.year, m.month);
     workDays.forEach(wd => {
       if (wd.holiday) return;
       const key = dateKey(m.year, m.month, wd.day);
-      const cb = document.getElementById(key);
-      const checked = cb && cb.checked ? '1' : '0';
-      csv += `${key},${giorni[wd.dow]},${checked}\n`;
+      const btn = document.getElementById(key);
+      const state = btn ? parseInt(btn.dataset.state) || 0 : 0;
+      csv += `${key},${giorni[wd.dow]},${state}\n`;
     });
   });
 
@@ -732,10 +855,7 @@ async function saveCSV() {
     try {
       const handle = await window.showSaveFilePicker({
         suggestedName: CSV_FILENAME,
-        types: [{
-          description: 'File CSV',
-          accept: { 'text/csv': ['.csv'] }
-        }]
+        types: [{ description: 'File CSV', accept: { 'text/csv': ['.csv'] } }]
       });
       const writable = await handle.createWritable();
       await writable.write(csv);
@@ -756,6 +876,7 @@ async function saveCSV() {
   showToast('CSV scaricato nella cartella Download \u2713');
 }
 
+/* ── CSV LOAD ── */
 function loadCSV(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -769,35 +890,47 @@ function loadCSV(event) {
       const trimmed = line.trim();
       if (trimmed.startsWith('#MaxSW=')) {
         const val = parseInt(trimmed.replace('#MaxSW=', ''));
-        if (!isNaN(val)) document.getElementById('maxDays').value = val;
+        if (!isNaN(val)) document.getElementById('maxSW').value = val;
+        return;
+      }
+      if (trimmed.startsWith('#MaxFerie=')) {
+        const val = parseInt(trimmed.replace('#MaxFerie=', ''));
+        if (!isNaN(val)) document.getElementById('maxFerie').value = val;
         return;
       }
       const parts = trimmed.split(',');
       if (parts.length >= 3 && parts[0] !== 'Data') {
         const key = parts[0];
-        const checked = parts[2] === '1';
-        const cb = document.getElementById(key);
-        if (cb && !cb.disabled) {
-          cb.checked = checked;
-          if (checked) loaded++;
+        let state = parseInt(parts[2]);
+        // Retrocompatibilità: il vecchio CSV usava "SmartWorking" con 0/1
+        // Il nuovo usa "Stato" con 0/1/2
+        if (isNaN(state)) state = 0;
+        const btn = document.getElementById(key);
+        if (btn) {
+          btn.dataset.state = state;
+          loaded++;
         }
       }
     });
 
     updateCount();
-    showToast(`CSV caricato \u2014 ${loaded} giornate ripristinate \u2713`);
+    showToast(`CSV caricato \u2014 ${loaded} giorni ripristinati \u2713`);
   };
   reader.readAsText(file);
   event.target.value = '';
 }
 
+/* ── CLEAR ── */
 function clearAll() {
   if (!confirm('Vuoi davvero cancellare tutte le selezioni?')) return;
-  document.querySelectorAll('.day-cell input[type="checkbox"]:not(:disabled)').forEach(cb => cb.checked = false);
+  document.querySelectorAll('.day-btn[data-state]').forEach(btn => {
+    btn.dataset.state = 0;
+  });
   updateCount();
   showToast('Tutte le selezioni rimosse');
 }
 
+/* ── TOAST ── */
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -805,6 +938,7 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2600);
 }
 
+// ── INIT ──
 buildCalendar();
 </script>
 </body>
