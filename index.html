@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Working Tracker — Mar–Giu 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2f3f7;
+    --card: #ffffff;
+    --accent: #0C21AB;
+    --accent-light: #e8ecf8;
+    --accent-hover: #091a8a;
+    --text: #1e1e1e;
+    --text-muted: #7a7a7a;
+    --border: #d8dae2;
+    --checked-bg: #0C21AB;
+    --checked-text: #ffffff;
+    --holiday-bg: #fef3e2;
+    --holiday-text: #b8860b;
+    --holiday-border: #f0d89a;
+    --red: #d32f2f;
+    --red-light: #fdecea;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+<script data-goatcounter="https://fc-smartworking.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 0 60px 0;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0C21AB 0%, #060f55 100%);
+    color: white;
+    padding: 40px 20px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 2.4rem;
+    letter-spacing: -0.5px;
+    position: relative;
+  }
+  header p {
+    margin-top: 6px;
+    opacity: 0.75;
+    font-size: 0.95rem;
+    font-weight: 500;
+    position: relative;
+  }
+
+  /* ── STICKY COUNTER BAR ── */
+  .counter-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .counter-item {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .counter-item .num {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 2rem;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 30px;
+    text-align: right;
+  }
+  .counter-item .label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  .separator {
+    width: 1px;
+    height: 28px;
+    background: var(--border);
+  }
+
+  .max-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .max-input-wrap .label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  .max-input-wrap input {
+    width: 58px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--accent);
+    text-align: center;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 2px 4px;
+    background: var(--bg);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .max-input-wrap input:focus {
+    border-color: var(--accent);
+  }
+
+  .residual-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    background: var(--accent-light);
+    color: var(--accent);
+    transition: all 0.3s;
+  }
+  .residual-badge.negative {
+    background: var(--red-light);
+    color: var(--red);
+    animation: pulse-red 1s ease-in-out infinite;
+  }
+  @keyframes pulse-red {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(211,47,47,0.3); }
+    50% { box-shadow: 0 0 0 6px rgba(211,47,47,0); }
+  }
+
+  /* ── TOOLBAR ── */
+  .toolbar {
+    max-width: 1100px;
+    margin: 24px auto 0;
+    padding: 0 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: 2px solid var(--accent);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+  }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-outline {
+    background: transparent;
+    color: var(--accent);
+  }
+  .btn-outline:hover { background: var(--accent-light); }
+  .btn svg { width: 16px; height: 16px; }
+
+  /* ── CALENDAR ── */
+  .months-container {
+    max-width: 1100px;
+    margin: 28px auto 0;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 800px) {
+    .months-container { grid-template-columns: 1fr; }
+  }
+
+  .month-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+    animation: fadeInUp 0.5s ease both;
+  }
+  .month-card:nth-child(2) { animation-delay: 0.08s; }
+  .month-card:nth-child(3) { animation-delay: 0.16s; }
+  .month-card:nth-child(4) { animation-delay: 0.24s; }
+  .month-card:hover { box-shadow: var(--shadow-lg); }
+
+  .month-header {
+    padding: 18px 22px 14px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .month-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  .month-header .month-count {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .weekday-header {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 10px 12px 6px;
+    gap: 4px;
+  }
+  .weekday-header span {
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+  }
+
+  .days-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 4px 12px 16px;
+    gap: 4px;
+  }
+
+  .day-cell {
+    position: relative;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .day-cell.empty { pointer-events: none; }
+
+  .day-cell input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .day-cell label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text);
+    background: var(--bg);
+    border: 2px solid transparent;
+    user-select: none;
+  }
+  .day-cell label:hover {
+    border-color: var(--accent);
+    transform: scale(1.06);
+  }
+  .day-cell input:checked + label {
+    background: var(--checked-bg);
+    color: var(--checked-text);
+    border-color: var(--checked-bg);
+    box-shadow: 0 2px 8px rgba(12,33,171,0.3);
+  }
+  .day-cell input:checked + label::after {
+    content: '\2713';
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    font-size: 0.55rem;
+    opacity: 0.7;
+  }
+
+  /* ── HOLIDAY CELL ── */
+  .day-cell.holiday label {
+    background: var(--holiday-bg);
+    color: var(--holiday-text);
+    border: 2px dashed var(--holiday-border);
+    cursor: default;
+    font-size: 0.82rem;
+  }
+  .day-cell.holiday label:hover {
+    border-color: var(--holiday-border);
+    transform: none;
+  }
+  .day-cell.holiday input { pointer-events: none; }
+
+  /* ── LEGEND ── */
+  .legend {
+    max-width: 1100px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .legend-swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+  }
+  .swatch-available { background: var(--bg); border: 2px solid var(--border); }
+  .swatch-checked { background: var(--checked-bg); }
+  .swatch-holiday { background: var(--holiday-bg); border: 2px dashed var(--holiday-border); }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #1e1e1e;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
+    z-index: 200;
+    pointer-events: none;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  #csvInput { display: none; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── INSTRUCTIONS ── */
+  .instructions {
+    max-width: 1100px;
+    margin: 28px auto 0;
+    padding: 0 20px;
+  }
+  .instructions details {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .instructions summary {
+    padding: 16px 22px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
+  .instructions .content {
+    padding: 0 22px 20px;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+  .instructions code {
+    background: #ecedf2;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--text);
+  }
+  .instructions pre {
+    background: #1e1e1e;
+    color: #e0e0e0;
+    padding: 14px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.78rem;
+    margin: 10px 0;
+    line-height: 1.6;
+  }
+  .instructions pre .cm { color: #6a9955; }
+  .instructions pre .st { color: #ce9178; }
+
+  /* ── FOOTER / LICENSE ── */
+  .license-footer {
+    max-width: 1100px;
+    margin: 36px auto 0;
+    padding: 20px 20px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .license-footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .license-footer a:hover {
+    text-decoration: underline;
+  }
+  .license-footer .cc-icons {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+  .license-footer .cc-icons img {
+    height: 18px;
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Smart Working Tracker</h1>
+  <p>Marzo – Giugno 2026</p>
+</header>
+
+<div class="counter-bar">
+  <div class="counter-item">
+    <span class="num" id="totalCount">0</span>
+    <span class="label">Giornate SW</span>
+  </div>
+  <div class="separator"></div>
+  <div class="counter-item">
+    <span class="num" id="totalWorkdays">0</span>
+    <span class="label">Giorni lavorativi</span>
+  </div>
+  <div class="separator"></div>
+  <div class="max-input-wrap">
+    <input type="number" id="maxDays" value="40" min="0" max="999" oninput="updateCount()">
+    <span class="label">Max SW</span>
+  </div>
+  <div class="separator"></div>
+  <div class="counter-item">
+    <span class="residual-badge" id="residualBadge">
+      <span id="residualCount">40</span>&nbsp;residui
+    </span>
+  </div>
+</div>
+
+<div class="toolbar">
+  <button class="btn btn-primary" onclick="saveCSV()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+    Salva CSV
+  </button>
+  <button class="btn btn-outline" onclick="document.getElementById('csvInput').click()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+    Carica CSV
+  </button>
+  <button class="btn btn-outline" onclick="clearAll()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2-2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+    Reset
+  </button>
+  <input type="file" id="csvInput" accept=".csv" onchange="loadCSV(event)">
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch swatch-available"></div> Disponibile</div>
+  <div class="legend-item"><div class="legend-swatch swatch-checked"></div> Smart Working</div>
+  <div class="legend-item"><div class="legend-swatch swatch-holiday"></div> Festivo</div>
+</div>
+
+<div class="months-container" id="calendar"></div>
+
+<div class="instructions">
+  <details>
+    <summary>Come modificare i giorni festivi nel codice HTML</summary>
+    <div class="content">
+      <p>Apri questo file con un editor di testo (Notepad, VS Code, ecc.) e cerca <code>const HOLIDAYS</code> nel blocco <code>&lt;script&gt;</code>. Troverai:</p>
+      <pre><span class="cm">// Formato chiave: 'YYYY-MM-GG'  valore: 'Nome festività'</span>
+const HOLIDAYS = {
+  <span class="st">'2026-04-06'</span>: <span class="st">'Lunedì dell\'Angelo'</span>,
+  <span class="st">'2026-04-25'</span>: <span class="st">'Festa della Liberazione'</span>,
+  <span class="st">'2026-05-01'</span>: <span class="st">'Festa dei Lavoratori'</span>,
+  <span class="st">'2026-06-02'</span>: <span class="st">'Festa della Repubblica'</span>,
+  <span class="cm">// '2026-06-24': 'San Giovanni (Torino)',</span>
+};</pre>
+      <p><strong>Aggiungere un festivo</strong> — inserisci una riga con data <code>'YYYY-MM-GG'</code> e nome tra apici, seguita da virgola.</p>
+      <p><strong>Rimuovere un festivo</strong> — cancella la riga oppure anteponile <code>//</code> per commentarla.</p>
+      <p><strong>Nota:</strong> i festivi che cadono di sabato o domenica vengono ignorati automaticamente.</p>
+    </div>
+  </details>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER LICENZA
+     ═══════════════════════════════════════════════════ -->
+<footer class="license-footer">
+  <p>
+    <span class="cc-icons">
+      <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="CC">
+      <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="BY">
+    </span>
+    Smart Working Tracker &copy; 2026 <strong>FC</strong> &mdash;
+    Licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">Creative Commons Attribution 4.0 International (CC BY 4.0)</a>.
+  </p>
+  <p>Puoi usare, modificare e ridistribuire liberamente, anche a fini commerciali, a condizione di citare l'autore originale.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// GIORNI FESTIVI — Modifica qui per aggiungere/rimuovere festività
+// Formato: 'YYYY-MM-DD': 'Nome festività'
+// ══════════════════════════════════════════════════════════════
+const HOLIDAYS = {
+  '2026-04-06': 'Lunedì dell\'Angelo',
+  '2026-04-25': 'Festa della Liberazione',
+  '2026-05-01': 'Festa dei Lavoratori',
+  '2026-06-02': 'Festa della Repubblica',
+  // ── Patroni — decommenta o aggiungi il tuo: ──
+  // '2026-06-24': 'San Giovanni (Torino)',
+  // '2026-06-29': 'Santi Pietro e Paolo (Roma)',
+  // '2026-12-07': 'Sant\'Ambrogio (Milano)',
+};
+
+const MONTHS = [
+  { name: 'Marzo',  year: 2026, month: 2 },
+  { name: 'Aprile', year: 2026, month: 3 },
+  { name: 'Maggio', year: 2026, month: 4 },
+  { name: 'Giugno', year: 2026, month: 5 }
+];
+const WEEKDAYS = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven'];
+const CSV_FILENAME = 'smart_working_2026.csv';
+
+function dateKey(year, month, day) {
+  return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+}
+
+function isHoliday(key) {
+  return HOLIDAYS.hasOwnProperty(key);
+}
+
+function getWorkingDays(year, month) {
+  const days = [];
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  for (let d = 1; d <= daysInMonth; d++) {
+    const date = new Date(year, month, d);
+    const dow = date.getDay();
+    if (dow >= 1 && dow <= 5) {
+      const key = dateKey(year, month, d);
+      days.push({ day: d, dow, holiday: isHoliday(key) });
+    }
+  }
+  return days;
+}
+
+function buildCalendar() {
+  const container = document.getElementById('calendar');
+  container.innerHTML = '';
+
+  MONTHS.forEach(m => {
+    const workDays = getWorkingDays(m.year, m.month);
+    const checkableDays = workDays.filter(d => !d.holiday).length;
+    const card = document.createElement('div');
+    card.className = 'month-card';
+    card.dataset.month = m.month;
+
+    card.innerHTML = `
+      <div class="month-header">
+        <h2>${m.name} ${m.year}</h2>
+        <span class="month-count" id="mc-${m.month}">0 / ${checkableDays}</span>
+      </div>
+      <div class="weekday-header">
+        ${WEEKDAYS.map(w => `<span>${w}</span>`).join('')}
+      </div>`;
+
+    const grid = document.createElement('div');
+    grid.className = 'days-grid';
+
+    const daysInMonth = new Date(m.year, m.month + 1, 0).getDate();
+    let weekStarted = false;
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const date = new Date(m.year, m.month, d);
+      const dow = date.getDay();
+      if (dow === 0 || dow === 6) continue;
+
+      if (!weekStarted) {
+        for (let e = 1; e < dow; e++) {
+          const empty = document.createElement('div');
+          empty.className = 'day-cell empty';
+          grid.appendChild(empty);
+        }
+        weekStarted = true;
+      }
+
+      const key = dateKey(m.year, m.month, d);
+      const cell = document.createElement('div');
+      cell.className = 'day-cell';
+
+      if (isHoliday(key)) {
+        cell.classList.add('holiday');
+        cell.innerHTML = `<input type="checkbox" id="${key}" disabled><label for="${key}" title="${HOLIDAYS[key]}">${d}</label>`;
+      } else {
+        cell.innerHTML = `<input type="checkbox" id="${key}" onchange="updateCount()"><label for="${key}">${d}</label>`;
+      }
+      grid.appendChild(cell);
+
+      if (dow < 5) {
+        const nextDay = d + 1;
+        const nextDate = new Date(m.year, m.month, nextDay);
+        if (nextDay > daysInMonth || nextDate.getDay() === 0 || nextDate.getDay() === 6) {
+          for (let e = dow + 1; e <= 5; e++) {
+            const empty = document.createElement('div');
+            empty.className = 'day-cell empty';
+            grid.appendChild(empty);
+          }
+        }
+      }
+    }
+
+    card.appendChild(grid);
+    container.appendChild(card);
+  });
+
+  updateCount();
+}
+
+function updateCount() {
+  let total = 0;
+  let totalWorkdays = 0;
+
+  MONTHS.forEach(m => {
+    const workDays = getWorkingDays(m.year, m.month);
+    const checkable = workDays.filter(d => !d.holiday);
+    totalWorkdays += checkable.length;
+    let monthCount = 0;
+
+    checkable.forEach(wd => {
+      const key = dateKey(m.year, m.month, wd.day);
+      const cb = document.getElementById(key);
+      if (cb && cb.checked) monthCount++;
+    });
+
+    total += monthCount;
+    const badge = document.getElementById(`mc-${m.month}`);
+    if (badge) badge.textContent = `${monthCount} / ${checkable.length}`;
+  });
+
+  document.getElementById('totalCount').textContent = total;
+  document.getElementById('totalWorkdays').textContent = totalWorkdays;
+
+  const maxDays = parseInt(document.getElementById('maxDays').value) || 0;
+  const residual = maxDays - total;
+  const residualEl = document.getElementById('residualCount');
+  const badgeEl = document.getElementById('residualBadge');
+  residualEl.textContent = residual;
+
+  if (residual < 0) {
+    badgeEl.classList.add('negative');
+  } else {
+    badgeEl.classList.remove('negative');
+  }
+}
+
+async function saveCSV() {
+  const maxVal = document.getElementById('maxDays').value;
+  const giorni = ['', 'Lunedi', 'Martedi', 'Mercoledi', 'Giovedi', 'Venerdi'];
+
+  let csv = `#MaxSW=${maxVal}\nData,Giorno,SmartWorking\n`;
+
+  MONTHS.forEach(m => {
+    const workDays = getWorkingDays(m.year, m.month);
+    workDays.forEach(wd => {
+      if (wd.holiday) return;
+      const key = dateKey(m.year, m.month, wd.day);
+      const cb = document.getElementById(key);
+      const checked = cb && cb.checked ? '1' : '0';
+      csv += `${key},${giorni[wd.dow]},${checked}\n`;
+    });
+  });
+
+  if (window.showSaveFilePicker) {
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: CSV_FILENAME,
+        types: [{
+          description: 'File CSV',
+          accept: { 'text/csv': ['.csv'] }
+        }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(csv);
+      await writable.close();
+      showToast('CSV salvato con successo \u2713');
+      return;
+    } catch (e) {
+      if (e.name === 'AbortError') return;
+    }
+  }
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = CSV_FILENAME;
+  link.click();
+  URL.revokeObjectURL(link.href);
+  showToast('CSV scaricato nella cartella Download \u2713');
+}
+
+function loadCSV(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const lines = e.target.result.split('\n');
+    let loaded = 0;
+
+    lines.forEach(line => {
+      const trimmed = line.trim();
+      if (trimmed.startsWith('#MaxSW=')) {
+        const val = parseInt(trimmed.replace('#MaxSW=', ''));
+        if (!isNaN(val)) document.getElementById('maxDays').value = val;
+        return;
+      }
+      const parts = trimmed.split(',');
+      if (parts.length >= 3 && parts[0] !== 'Data') {
+        const key = parts[0];
+        const checked = parts[2] === '1';
+        const cb = document.getElementById(key);
+        if (cb && !cb.disabled) {
+          cb.checked = checked;
+          if (checked) loaded++;
+        }
+      }
+    });
+
+    updateCount();
+    showToast(`CSV caricato \u2014 ${loaded} giornate ripristinate \u2713`);
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function clearAll() {
+  if (!confirm('Vuoi davvero cancellare tutte le selezioni?')) return;
+  document.querySelectorAll('.day-cell input[type="checkbox"]:not(:disabled)').forEach(cb => cb.checked = false);
+  updateCount();
+  showToast('Tutte le selezioni rimosse');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+buildCalendar();
+</script>
+</body>
+</html>
