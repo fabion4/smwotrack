@@ -281,72 +281,38 @@
   .instructions .tip-box.warn { background: #fff8e1; border-left-color: #f9a825; }
   .instructions .tip-box.warn strong { color: #e65100; }
 
-  /* Visual mockup for Google Calendar UI */
   .gcal-mockup {
-    background: #ffffff;
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin: 14px 0;
-    font-size: 0.82rem;
-    max-width: 400px;
+    background: #ffffff; border: 2px solid var(--border);
+    border-radius: 10px; padding: 16px 20px; margin: 14px 0;
+    font-size: 0.82rem; max-width: 400px;
   }
   .gcal-mockup .gcal-label {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
+    font-size: 0.72rem; color: var(--text-muted);
+    font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
   }
   .gcal-mockup .gcal-file {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 8px 12px;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text);
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px 12px; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px; color: var(--text);
   }
   .gcal-mockup .gcal-file .icon { font-size: 1.1rem; }
   .gcal-mockup .gcal-dropdown {
-    border: 2px solid var(--accent);
-    border-radius: 6px;
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: var(--accent);
-    font-weight: 600;
-    background: var(--accent-light);
-    position: relative;
+    border: 2px solid var(--accent); border-radius: 6px;
+    padding: 8px 12px; display: flex; align-items: center;
+    justify-content: space-between; color: var(--accent);
+    font-weight: 600; background: var(--accent-light);
   }
   .gcal-mockup .gcal-dropdown .arrow { font-size: 0.7rem; }
   .gcal-mockup .gcal-hint {
-    font-size: 0.72rem;
-    color: var(--red);
-    font-weight: 700;
-    margin-top: 6px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    font-size: 0.72rem; color: var(--red); font-weight: 700;
+    margin-top: 6px; display: flex; align-items: center; gap: 4px;
   }
 
   .step-number {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 700;
-    margin-right: 4px;
-    flex-shrink: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--accent); color: white;
+    font-size: 0.7rem; font-weight: 700; margin-right: 4px; flex-shrink: 0;
   }
   .step-number.orange { background: var(--ferie-bg); }
 
@@ -487,7 +453,6 @@
         <strong>⚠️ Attenzione:</strong> importa <strong>sempre</strong> in un calendario dedicato, mai in quello principale! Così quando vorrai aggiornare potrai cancellare solo quello senza toccare i tuoi appuntamenti personali.
       </div>
 
-      <!-- ── STEP 1: Crea calendario ── -->
       <h3 style="margin:18px 0 10px; color:var(--text); font-size:0.95rem;">
         <span class="step-number">1</span> Crea un calendario dedicato (solo la prima volta)
       </h3>
@@ -498,26 +463,22 @@
         <li>Dagli un nome chiaro, ad esempio <code>SW & Ferie</code></li>
         <li>Clicca <strong>Crea calendario</strong></li>
       </ol>
-      <p>D'ora in poi userai sempre questo calendario per le importazioni.</p>
 
-      <!-- ── STEP 2: Esporta ICS ── -->
       <h3 style="margin:18px 0 10px; color:var(--text); font-size:0.95rem;">
         <span class="step-number">2</span> Esporta il file .ics dal tracker
       </h3>
-      <p>Clicca il bottone <strong>"Esporta .ics"</strong> nella toolbar qui sopra e salva il file sul tuo computer.</p>
+      <p>Clicca il bottone <strong>"Esporta .ics"</strong> nella toolbar qui sopra e salva il file.</p>
 
-      <!-- ── STEP 3: Importa ── -->
       <h3 style="margin:18px 0 10px; color:var(--text); font-size:0.95rem;">
         <span class="step-number">3</span> Importa in Google Calendar
       </h3>
       <ol>
-        <li>In Google Calendar clicca l'icona ⚙️ (ingranaggio) in alto a destra → <strong>Impostazioni</strong></li>
+        <li>In Google Calendar clicca ⚙️ in alto a destra → <strong>Impostazioni</strong></li>
         <li>Nel menu a sinistra clicca <strong>Importa ed esporta</strong></li>
-        <li>Clicca <strong>"Seleziona il file dal computer"</strong> e scegli il tuo file <code>.ics</code></li>
-        <li><strong>PASSAGGIO CHIAVE</strong> — sotto al selettore del file trovi un <strong>menu a tendina</strong> con la lista dei tuoi calendari. È qui che devi cambiare la destinazione:</li>
+        <li>Clicca <strong>"Seleziona il file dal computer"</strong> e scegli il file <code>.ics</code></li>
+        <li><strong>PASSAGGIO CHIAVE</strong> — sotto al selettore del file c'è un <strong>menu a tendina</strong>:</li>
       </ol>
 
-      <!-- Visual mockup del dropdown Google Calendar -->
       <div class="gcal-mockup">
         <div class="gcal-label">Aggiungi al calendario</div>
         <div class="gcal-file">
@@ -533,32 +494,28 @@
       </div>
 
       <ol start="5">
-        <li>Seleziona dal menu a tendina il calendario <code>SW & Ferie</code></li>
-        <li>Clicca <strong>Importa</strong> — gli eventi appariranno nel calendario dedicato</li>
+        <li>Seleziona dal menu il calendario <code>SW & Ferie</code></li>
+        <li>Clicca <strong>Importa</strong></li>
       </ol>
 
-      <!-- ── STEP 4: Aggiornamento ── -->
       <h3 style="margin:18px 0 10px; color:var(--ferie-bg); font-size:0.95rem;">
         <span class="step-number orange">4</span> Quando vuoi aggiornare il calendario
       </h3>
 
       <div class="tip-box warn">
-        <strong>⚠️ Perché serve questo passaggio?</strong> Google Calendar non "aggiorna" gli eventi importati — li <strong>aggiunge</strong> e basta. Se re-importi senza cancellare, ti ritrovi con tutti gli eventi duplicati.
+        <strong>⚠️ Perché serve questo passaggio?</strong> Google Calendar non "aggiorna" gli eventi importati — li <strong>aggiunge</strong>. Se re-importi senza cancellare, trovi tutto duplicato.
       </div>
 
       <ol>
-        <li>In Google Calendar, nella barra laterale sinistra trova il calendario <code>SW & Ferie</code></li>
-        <li>Clicca i <strong>tre puntini</strong> (⋮) che appaiono passandoci sopra con il mouse</li>
-        <li>Scegli <strong>"Impostazioni e condivisione"</strong></li>
-        <li>Scorri fino in fondo alla pagina e clicca <strong>Elimina</strong></li>
-        <li>Ricrea il calendario <code>SW & Ferie</code> (come al passo 1)</li>
-        <li>Esporta il nuovo .ics dal tracker e importalo nel calendario appena ricreato</li>
+        <li>In Google Calendar trova il calendario <code>SW & Ferie</code> nella barra laterale</li>
+        <li>Clicca i <strong>tre puntini</strong> (⋮) → <strong>"Impostazioni e condivisione"</strong></li>
+        <li>Scorri in fondo e clicca <strong>Elimina</strong></li>
+        <li>Ricrea il calendario e re-importa il nuovo .ics</li>
       </ol>
 
       <div class="tip-box">
-        <strong>💡 Suggerimento pratico:</strong> usa il <strong>CSV per il salvataggio quotidiano</strong> (è istantaneo e non tocca Google Calendar). Aggiorna Google Calendar solo quando serve davvero, ad esempio a inizio mese. Cancellare e ricreare il calendario dedicato richiede meno di 30 secondi.
+        <strong>💡 Suggerimento:</strong> usa il <strong>CSV per il salvataggio quotidiano</strong> (istantaneo). Aggiorna Google Calendar solo periodicamente, ad esempio a inizio mese.
       </div>
-
     </div>
   </details>
 
@@ -580,6 +537,9 @@ const HOLIDAYS = {
   </details>
 </div>
 
+<!-- ═══════════════════════════════════════════════════
+     FOOTER LICENZA
+     ═══════════════════════════════════════════════════ -->
 <footer class="license-footer">
   <p>
     <span class="cc-icons">
@@ -587,13 +547,43 @@ const HOLIDAYS = {
       <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="BY">
     </span>
     Smart Working Tracker &copy; 2026 <strong>FC</strong> &mdash;
-    Licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC BY 4.0</a>.
-    Uso, modifica e ridistribuzione liberi con obbligo di citazione dell'autore.
+    Licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">Creative Commons Attribution 4.0 International (CC BY 4.0)</a>.
+  </p>
+  <p>Libero per qualsiasi uso, anche commerciale. Ogni opera derivata <strong>deve citare l'autore originale (FC)</strong> e linkare il repository sorgente.</p>
+  <p style="margin-top:8px;">
+    <a href="https://github.com/fabion4/smwotrack" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;font-weight:600;">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      Contribuisci al progetto su GitHub
+    </a>
   </p>
 </footer>
 
 <div class="toast" id="toast"></div>
 
+<!-- ═══════════════════════════════════════════════════════════════
+     ANALYTICS — GoatCounter
+     ═══════════════════════════════════════════════════════════════
+     Questo progetto utilizza GoatCounter (https://goatcounter.com)
+     per il solo conteggio anonimo delle visite alla pagina.
+
+     GoatCounter:
+       • NON usa cookie
+       • NON traccia gli utenti con identificatori univoci
+       • NON richiede banner GDPR / consenso
+       • NON raccoglie dati personali
+       • Aggiunge solo ~3.5 KB alla pagina
+
+     Nessun dato dell'utente (selezioni, CSV, ICS, valori inseriti)
+     viene trasmesso in alcun modo. Tutto resta nel browser locale.
+
+     Se stai analizzando il codice sorgente e noti l'assenza di
+     sistemi di tracciamento interni: è una scelta progettuale.
+     Questa app è stata pensata per funzionare interamente lato
+     client, senza backend, senza database, senza autenticazione.
+     I dati dell'utente non lasciano mai il suo dispositivo.
+
+     L'unico script esterno è questo contatore di visite anonimo.
+     ═══════════════════════════════════════════════════════════════ -->
 <script data-goatcounter="https://fc-smartworking.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 
@@ -649,7 +639,6 @@ function cycleState(key) {
 function buildCalendar() {
   const c = document.getElementById('calendar'); c.innerHTML = '';
   MONTHS.forEach(m => {
-    const wd = getWorkingDays(m.year, m.month);
     const card = document.createElement('div');
     card.className = 'month-card';
     card.innerHTML = `
@@ -667,13 +656,25 @@ function buildCalendar() {
     for (let d = 1; d <= dim; d++) {
       const dow = new Date(m.year, m.month, d).getDay();
       if (dow === 0 || dow === 6) continue;
-      if (!started) { for (let e = 1; e < dow; e++) { const x = document.createElement('div'); x.className = 'day-cell empty'; grid.appendChild(x); } started = true; }
+      if (!started) {
+        for (let e = 1; e < dow; e++) { const x = document.createElement('div'); x.className = 'day-cell empty'; grid.appendChild(x); }
+        started = true;
+      }
       const key = dateKey(m.year, m.month, d), cell = document.createElement('div');
       cell.className = 'day-cell';
-      if (isHoliday(key)) { cell.classList.add('holiday'); cell.innerHTML = `<div class="day-btn" title="${HOLIDAYS[key]}">${d}</div>`; }
-      else { cell.innerHTML = `<div class="day-btn" id="${key}" data-state="0" onclick="cycleState('${key}')">${d}</div>`; }
+      if (isHoliday(key)) {
+        cell.classList.add('holiday');
+        cell.innerHTML = `<div class="day-btn" title="${HOLIDAYS[key]}">${d}</div>`;
+      } else {
+        cell.innerHTML = `<div class="day-btn" id="${key}" data-state="0" onclick="cycleState('${key}')">${d}</div>`;
+      }
       grid.appendChild(cell);
-      if (dow < 5) { const nd = new Date(m.year, m.month, d + 1); if (d + 1 > dim || nd.getDay() === 0 || nd.getDay() === 6) { for (let e = dow + 1; e <= 5; e++) { const x = document.createElement('div'); x.className = 'day-cell empty'; grid.appendChild(x); } } }
+      if (dow < 5) {
+        const nd = new Date(m.year, m.month, d + 1);
+        if (d + 1 > dim || nd.getDay() === 0 || nd.getDay() === 6) {
+          for (let e = dow + 1; e <= 5; e++) { const x = document.createElement('div'); x.className = 'day-cell empty'; grid.appendChild(x); }
+        }
+      }
     }
     card.appendChild(grid); c.appendChild(card);
   });
@@ -685,7 +686,12 @@ function updateCount() {
   MONTHS.forEach(m => {
     const ck = getWorkingDays(m.year, m.month).filter(d => !d.holiday);
     tW += ck.length; let mSW = 0, mF = 0;
-    ck.forEach(wd => { const b = document.getElementById(dateKey(m.year, m.month, wd.day)); if (!b) return; const s = parseInt(b.dataset.state) || 0; if (s === 1) mSW++; if (s === 2) mF++; });
+    ck.forEach(wd => {
+      const b = document.getElementById(dateKey(m.year, m.month, wd.day));
+      if (!b) return;
+      const s = parseInt(b.dataset.state) || 0;
+      if (s === 1) mSW++; if (s === 2) mF++;
+    });
     tSW += mSW; tF += mF;
     const bSW = document.getElementById(`mc-sw-${m.month}`), bFE = document.getElementById(`mc-fe-${m.month}`);
     if (bSW) bSW.textContent = `SW ${mSW}`; if (bFE) bFE.textContent = `F ${mF}`;
@@ -693,9 +699,11 @@ function updateCount() {
   document.getElementById('swCount').textContent = tSW;
   document.getElementById('ferieCount').textContent = tF;
   document.getElementById('totalWorkdays').textContent = tW;
+
   const mSW = parseInt(document.getElementById('maxSW').value) || 0, rSW = mSW - tSW;
   document.getElementById('swResidual').textContent = rSW;
   document.getElementById('swResidualBadge').classList.toggle('negative', rSW < 0);
+
   const mF = parseInt(document.getElementById('maxFerie').value) || 0, rF = mF - tF;
   document.getElementById('ferieResidual').textContent = rF;
   const fb = document.getElementById('ferieResidualBadge');
@@ -707,8 +715,20 @@ function updateCount() {
 async function saveCSV() {
   const g = ['', 'Lunedi', 'Martedi', 'Mercoledi', 'Giovedi', 'Venerdi'];
   let csv = `#MaxSW=${document.getElementById('maxSW').value}\n#MaxFerie=${document.getElementById('maxFerie').value}\nData,Giorno,Stato\n`;
-  MONTHS.forEach(m => { getWorkingDays(m.year, m.month).forEach(wd => { if (wd.holiday) return; const k = dateKey(m.year, m.month, wd.day), b = document.getElementById(k); csv += `${k},${g[wd.dow]},${b ? parseInt(b.dataset.state) || 0 : 0}\n`; }); });
-  if (window.showSaveFilePicker) { try { const h = await window.showSaveFilePicker({ suggestedName: CSV_FILENAME, types: [{ description: 'CSV', accept: { 'text/csv': ['.csv'] } }] }); const w = await h.createWritable(); await w.write(csv); await w.close(); showToast('CSV salvato \u2713'); return; } catch (e) { if (e.name === 'AbortError') return; } }
+  MONTHS.forEach(m => {
+    getWorkingDays(m.year, m.month).forEach(wd => {
+      if (wd.holiday) return;
+      const k = dateKey(m.year, m.month, wd.day), b = document.getElementById(k);
+      csv += `${k},${g[wd.dow]},${b ? parseInt(b.dataset.state) || 0 : 0}\n`;
+    });
+  });
+  if (window.showSaveFilePicker) {
+    try {
+      const h = await window.showSaveFilePicker({ suggestedName: CSV_FILENAME, types: [{ description: 'CSV', accept: { 'text/csv': ['.csv'] } }] });
+      const w = await h.createWritable(); await w.write(csv); await w.close();
+      showToast('CSV salvato \u2713'); return;
+    } catch (e) { if (e.name === 'AbortError') return; }
+  }
   dl(csv, CSV_FILENAME, 'text/csv;charset=utf-8;');
   showToast('CSV scaricato \u2713');
 }
@@ -725,7 +745,7 @@ function loadCSV(event) {
       const p = t.split(',');
       if (p.length >= 3 && p[0] !== 'Data') { const b = document.getElementById(p[0]); if (b) { b.dataset.state = parseInt(p[2]) || 0; n++; } }
     });
-    updateCount(); showToast(`CSV caricato — ${n} giorni \u2713`);
+    updateCount(); showToast(`CSV caricato \u2014 ${n} giorni \u2713`);
   };
   r.readAsText(f); event.target.value = '';
 }
@@ -733,17 +753,35 @@ function loadCSV(event) {
 /* ═══ ICS EXPORT ═══ */
 function exportICS() {
   const ev = [], lb = { 1: 'Smart Working', 2: 'Ferie' }, em = { 1: '\uD83D\uDCBB', 2: '\u2600\uFE0F' };
-  MONTHS.forEach(m => { getWorkingDays(m.year, m.month).forEach(wd => {
-    if (wd.holiday) return; const k = dateKey(m.year, m.month, wd.day), b = document.getElementById(k); if (!b) return;
-    const s = parseInt(b.dataset.state) || 0; if (s === 0) return;
-    const ds = k.replace(/-/g, ''), nd = new Date(m.year, m.month, wd.day + 1),
-      de = `${nd.getFullYear()}${String(nd.getMonth()+1).padStart(2,'0')}${String(nd.getDate()).padStart(2,'0')}`;
-    ev.push('BEGIN:VEVENT\r\nDTSTART;VALUE=DATE:' + ds + '\r\nDTEND;VALUE=DATE:' + de + '\r\nSUMMARY:' + em[s] + ' ' + lb[s] + '\r\nUID:' + k + '-sw-tracker@fc\r\nDSTAMP:' + icsNow() + '\r\nTRANSP:TRANSPARENT\r\nEND:VEVENT');
-  }); });
+  MONTHS.forEach(m => {
+    getWorkingDays(m.year, m.month).forEach(wd => {
+      if (wd.holiday) return;
+      const k = dateKey(m.year, m.month, wd.day), b = document.getElementById(k);
+      if (!b) return;
+      const s = parseInt(b.dataset.state) || 0; if (s === 0) return;
+      const ds = k.replace(/-/g, ''), nd = new Date(m.year, m.month, wd.day + 1),
+        de = `${nd.getFullYear()}${String(nd.getMonth()+1).padStart(2,'0')}${String(nd.getDate()).padStart(2,'0')}`;
+      ev.push(
+        'BEGIN:VEVENT\r\n' +
+        'DTSTART;VALUE=DATE:' + ds + '\r\n' +
+        'DTEND;VALUE=DATE:' + de + '\r\n' +
+        'SUMMARY:' + em[s] + ' ' + lb[s] + '\r\n' +
+        'UID:' + k + '-sw-tracker@fc\r\n' +
+        'DTSTAMP:' + icsNow() + '\r\n' +
+        'TRANSP:TRANSPARENT\r\n' +
+        'END:VEVENT'
+      );
+    });
+  });
   if (!ev.length) { showToast('Nessun giorno selezionato'); return; }
-  const ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//FC//Smart Working Tracker//IT\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:Smart Working & Ferie 2026\r\n' + ev.join('\r\n') + '\r\nEND:VCALENDAR';
+  const ics =
+    'BEGIN:VCALENDAR\r\nVERSION:2.0\r\n' +
+    'PRODID:-//FC//Smart Working Tracker//IT\r\n' +
+    'CALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\n' +
+    'X-WR-CALNAME:Smart Working & Ferie 2026\r\n' +
+    ev.join('\r\n') + '\r\nEND:VCALENDAR';
   dl(ics, ICS_FILENAME, 'text/calendar;charset=utf-8');
-  showToast(`Calendario esportato — ${ev.length} eventi \u2713`);
+  showToast(`Calendario esportato \u2014 ${ev.length} eventi \u2713`);
 }
 
 /* ═══ ICS IMPORT ═══ */
@@ -767,22 +805,34 @@ function loadICS(event) {
       const btn = document.getElementById(key);
       if (btn) { btn.dataset.state = state; n++; }
     });
-    updateCount(); showToast(`ICS importato — ${n} eventi \u2713`);
+    updateCount(); showToast(`ICS importato \u2014 ${n} eventi \u2713`);
   };
   r.readAsText(f); event.target.value = '';
 }
 
 /* ═══ UTILS ═══ */
-function dl(content, name, mime) { const b = new Blob([content], { type: mime }), a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = name; a.click(); URL.revokeObjectURL(a.href); }
-function icsNow() { const n = new Date(); return n.getFullYear() + String(n.getMonth()+1).padStart(2,'0') + String(n.getDate()).padStart(2,'0') + 'T' + String(n.getHours()).padStart(2,'0') + String(n.getMinutes()).padStart(2,'0') + String(n.getSeconds()).padStart(2,'0') + 'Z'; }
+function dl(content, name, mime) {
+  const b = new Blob([content], { type: mime }), a = document.createElement('a');
+  a.href = URL.createObjectURL(b); a.download = name; a.click(); URL.revokeObjectURL(a.href);
+}
+function icsNow() {
+  const n = new Date();
+  return n.getFullYear() + String(n.getMonth()+1).padStart(2,'0') +
+    String(n.getDate()).padStart(2,'0') + 'T' + String(n.getHours()).padStart(2,'0') +
+    String(n.getMinutes()).padStart(2,'0') + String(n.getSeconds()).padStart(2,'0') + 'Z';
+}
 
 function clearAll() {
   if (!confirm('Vuoi davvero cancellare tutte le selezioni?')) return;
   document.querySelectorAll('.day-btn[data-state]').forEach(b => { b.dataset.state = 0; });
   updateCount(); showToast('Selezioni rimosse');
 }
-function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2600); }
+function showToast(msg) {
+  const t = document.getElementById('toast'); t.textContent = msg;
+  t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2600);
+}
 
+// ── INIT ──
 buildCalendar();
 </script>
 </body>
