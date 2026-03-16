@@ -104,9 +104,7 @@
     min-width: 24px;
     text-align: right;
   }
-  .counter-item .num.ferie-color {
-    color: var(--ferie-bg);
-  }
+  .counter-item .num.ferie-color { color: var(--ferie-bg); }
   .counter-item .label {
     font-size: 0.72rem;
     color: var(--text-muted);
@@ -119,7 +117,6 @@
     height: 28px;
     background: var(--border);
   }
-
   .max-input-wrap {
     display: flex;
     align-items: center;
@@ -146,12 +143,8 @@
     outline: none;
     transition: border-color 0.2s;
   }
-  .max-input-wrap input.ferie-input {
-    color: var(--ferie-bg);
-  }
-  .max-input-wrap input:focus {
-    border-color: var(--accent);
-  }
+  .max-input-wrap input.ferie-input { color: var(--ferie-bg); }
+  .max-input-wrap input:focus { border-color: var(--accent); }
 
   .residual-badge {
     display: inline-flex;
@@ -186,34 +179,46 @@
     margin: 24px auto 0;
     padding: 0 20px;
     display: flex;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
     justify-content: center;
+  }
+  .toolbar-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .toolbar-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--border);
+    margin: 0 4px;
+  }
+  @media (max-width: 700px) {
+    .toolbar-divider { display: none; }
   }
   .btn {
     font-family: 'DM Sans', sans-serif;
     font-weight: 600;
-    font-size: 0.85rem;
-    padding: 10px 22px;
+    font-size: 0.82rem;
+    padding: 9px 18px;
     border-radius: 8px;
     border: 2px solid var(--accent);
     cursor: pointer;
     transition: all 0.2s;
     display: inline-flex;
     align-items: center;
-    gap: 7px;
+    gap: 6px;
   }
-  .btn-primary {
-    background: var(--accent);
-    color: white;
-  }
+  .btn-primary { background: var(--accent); color: white; }
   .btn-primary:hover { background: var(--accent-hover); }
-  .btn-outline {
-    background: transparent;
-    color: var(--accent);
-  }
+  .btn-outline { background: transparent; color: var(--accent); }
   .btn-outline:hover { background: var(--accent-light); }
-  .btn svg { width: 16px; height: 16px; }
+  .btn-ics { background: transparent; color: var(--ferie-bg); border-color: var(--ferie-bg); }
+  .btn-ics:hover { background: var(--ferie-light); }
+  .btn svg { width: 15px; height: 15px; }
 
   /* ── CALENDAR ── */
   .months-container {
@@ -227,7 +232,6 @@
   @media (max-width: 800px) {
     .months-container { grid-template-columns: 1fr; }
   }
-
   .month-card {
     background: var(--card);
     border-radius: var(--radius);
@@ -253,24 +257,15 @@
     font-weight: 700;
     font-size: 1.5rem;
   }
-  .month-badges {
-    display: flex;
-    gap: 6px;
-  }
+  .month-badges { display: flex; gap: 6px; }
   .month-header .month-count {
     font-size: 0.75rem;
     font-weight: 600;
     padding: 3px 9px;
     border-radius: 20px;
   }
-  .month-count.sw-count {
-    color: var(--accent);
-    background: var(--accent-light);
-  }
-  .month-count.ferie-count {
-    color: var(--ferie-bg);
-    background: var(--ferie-light);
-  }
+  .month-count.sw-count { color: var(--accent); background: var(--accent-light); }
+  .month-count.ferie-count { color: var(--ferie-bg); background: var(--ferie-light); }
 
   .weekday-header {
     display: grid;
@@ -286,14 +281,12 @@
     letter-spacing: 1px;
     color: var(--text-muted);
   }
-
   .days-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     padding: 4px 12px 16px;
     gap: 4px;
   }
-
   .day-cell {
     position: relative;
     aspect-ratio: 1;
@@ -321,58 +314,30 @@
     position: relative;
     font-family: 'DM Sans', sans-serif;
   }
-  .day-btn:hover {
-    border-color: var(--accent);
-    transform: scale(1.06);
-  }
-
-  /* State: Smart Working */
+  .day-btn:hover { border-color: var(--accent); transform: scale(1.06); }
   .day-btn[data-state="1"] {
-    background: var(--sw-bg);
-    color: var(--sw-text);
+    background: var(--sw-bg); color: var(--sw-text);
     border-color: var(--sw-bg);
     box-shadow: 0 2px 8px rgba(12,33,171,0.3);
   }
   .day-btn[data-state="1"]::after {
-    content: 'SW';
-    position: absolute;
-    top: 2px;
-    right: 4px;
-    font-size: 0.45rem;
-    font-weight: 700;
-    opacity: 0.7;
-    letter-spacing: 0.5px;
+    content: 'SW'; position: absolute; top: 2px; right: 4px;
+    font-size: 0.45rem; font-weight: 700; opacity: 0.7; letter-spacing: 0.5px;
   }
-
-  /* State: Ferie */
   .day-btn[data-state="2"] {
-    background: var(--ferie-bg);
-    color: var(--ferie-text);
+    background: var(--ferie-bg); color: var(--ferie-text);
     border-color: var(--ferie-bg);
     box-shadow: 0 2px 8px rgba(232,89,12,0.3);
   }
   .day-btn[data-state="2"]::after {
-    content: 'F';
-    position: absolute;
-    top: 2px;
-    right: 5px;
-    font-size: 0.5rem;
-    font-weight: 700;
-    opacity: 0.7;
+    content: 'F'; position: absolute; top: 2px; right: 5px;
+    font-size: 0.5rem; font-weight: 700; opacity: 0.7;
   }
-
-  /* ── HOLIDAY CELL ── */
   .day-cell.holiday .day-btn {
-    background: var(--holiday-bg);
-    color: var(--holiday-text);
-    border: 2px dashed var(--holiday-border);
-    cursor: default;
-    font-size: 0.82rem;
+    background: var(--holiday-bg); color: var(--holiday-text);
+    border: 2px dashed var(--holiday-border); cursor: default; font-size: 0.82rem;
   }
-  .day-cell.holiday .day-btn:hover {
-    border-color: var(--holiday-border);
-    transform: none;
-  }
+  .day-cell.holiday .day-btn:hover { border-color: var(--holiday-border); transform: none; }
 
   /* ── LEGEND ── */
   .legend {
@@ -386,44 +351,26 @@
     font-size: 0.8rem;
     color: var(--text-muted);
   }
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .legend-swatch {
-    width: 18px;
-    height: 18px;
-    border-radius: 5px;
-  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-swatch { width: 18px; height: 18px; border-radius: 5px; }
   .swatch-available { background: var(--bg); border: 2px solid var(--border); }
   .swatch-sw { background: var(--sw-bg); }
   .swatch-ferie { background: var(--ferie-bg); }
   .swatch-holiday { background: var(--holiday-bg); border: 2px dashed var(--holiday-border); }
 
   .toast {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
+    position: fixed; bottom: 24px; left: 50%;
     transform: translateX(-50%) translateY(80px);
-    background: #1e1e1e;
-    color: white;
-    padding: 12px 28px;
-    border-radius: 10px;
-    font-size: 0.88rem;
-    font-weight: 600;
-    box-shadow: var(--shadow-lg);
-    opacity: 0;
+    background: #1e1e1e; color: white;
+    padding: 12px 28px; border-radius: 10px;
+    font-size: 0.88rem; font-weight: 600;
+    box-shadow: var(--shadow-lg); opacity: 0;
     transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
-    z-index: 200;
-    pointer-events: none;
+    z-index: 200; pointer-events: none;
   }
-  .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  #csvInput { display: none; }
+  #csvInput, #icsInput { display: none; }
 
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(16px); }
@@ -464,19 +411,33 @@
     color: var(--text);
   }
   .instructions pre {
-    background: #1e1e1e;
-    color: #e0e0e0;
-    padding: 14px 18px;
-    border-radius: 8px;
-    overflow-x: auto;
-    font-size: 0.78rem;
-    margin: 10px 0;
-    line-height: 1.6;
+    background: #1e1e1e; color: #e0e0e0;
+    padding: 14px 18px; border-radius: 8px;
+    overflow-x: auto; font-size: 0.78rem;
+    margin: 10px 0; line-height: 1.6;
   }
   .instructions pre .cm { color: #6a9955; }
   .instructions pre .st { color: #ce9178; }
+  .instructions ol { margin: 10px 0 10px 20px; }
+  .instructions ol li { margin-bottom: 6px; }
+  .instructions .tip-box {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .instructions .tip-box strong { color: var(--accent); }
+  .instructions .tip-box.warn {
+    background: #fff8e1;
+    border-left-color: #f9a825;
+  }
+  .instructions .tip-box.warn strong { color: #e65100; }
 
-  /* ── FOOTER / LICENSE ── */
+  /* ── FOOTER ── */
   .license-footer {
     max-width: 1100px;
     margin: 36px auto 0;
@@ -487,24 +448,13 @@
     color: var(--text-muted);
     line-height: 1.7;
   }
-  .license-footer a {
-    color: var(--accent);
-    text-decoration: none;
-  }
-  .license-footer a:hover {
-    text-decoration: underline;
-  }
+  .license-footer a { color: var(--accent); text-decoration: none; }
+  .license-footer a:hover { text-decoration: underline; }
   .license-footer .cc-icons {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    vertical-align: middle;
-    margin-right: 4px;
+    display: inline-flex; align-items: center;
+    gap: 4px; vertical-align: middle; margin-right: 4px;
   }
-  .license-footer .cc-icons img {
-    height: 18px;
-    opacity: 0.7;
-  }
+  .license-footer .cc-icons img { height: 18px; opacity: 0.7; }
 </style>
 </head>
 <body>
@@ -514,11 +464,8 @@
   <p>Marzo – Giugno 2026 &nbsp;·&nbsp; click per ciclare: vuoto → SW → Ferie → vuoto</p>
 </header>
 
-<!-- ═══════════════════════════════════════════════════
-     BARRA CONTATORI
-     ═══════════════════════════════════════════════════ -->
+<!-- ═══ COUNTER BAR ═══ -->
 <div class="counter-bar">
-  <!-- SW -->
   <div class="counter-group">
     <div class="counter-item">
       <span class="num" id="swCount">0</span>
@@ -532,10 +479,7 @@
       <span id="swResidual">40</span>&nbsp;residui
     </span>
   </div>
-
   <div class="separator"></div>
-
-  <!-- FERIE -->
   <div class="counter-group">
     <div class="counter-item">
       <span class="num ferie-color" id="ferieCount">0</span>
@@ -549,37 +493,46 @@
       <span id="ferieResidual">26</span>&nbsp;residue
     </span>
   </div>
-
   <div class="separator"></div>
-
   <div class="counter-item">
     <span class="num" id="totalWorkdays">0</span>
     <span class="label">Gg. lavorativi</span>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     TOOLBAR
-     ═══════════════════════════════════════════════════ -->
+<!-- ═══ TOOLBAR ═══ -->
 <div class="toolbar">
-  <button class="btn btn-primary" onclick="saveCSV()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-    Salva CSV
-  </button>
-  <button class="btn btn-outline" onclick="document.getElementById('csvInput').click()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-    Carica CSV
-  </button>
+  <div class="toolbar-group">
+    <button class="btn btn-primary" onclick="saveCSV()" title="Salva i dati in un file CSV (per ricaricarli nel tracker)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      Salva CSV
+    </button>
+    <button class="btn btn-outline" onclick="document.getElementById('csvInput').click()" title="Ricarica un file CSV salvato in precedenza">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Carica CSV
+    </button>
+  </div>
+  <div class="toolbar-divider"></div>
+  <div class="toolbar-group">
+    <button class="btn btn-ics" onclick="exportICS()" title="Esporta un file .ics da importare in Google Calendar, Apple Calendar, Outlook…">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14l2 2 4-4"/></svg>
+      Esporta .ics
+    </button>
+    <button class="btn btn-ics" onclick="document.getElementById('icsInput').click()" title="Reimporta un file .ics nel tracker">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="16 14 12 18 8 14"/></svg>
+      Carica .ics
+    </button>
+  </div>
+  <div class="toolbar-divider"></div>
   <button class="btn btn-outline" onclick="clearAll()">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2-2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
     Reset
   </button>
   <input type="file" id="csvInput" accept=".csv" onchange="loadCSV(event)">
+  <input type="file" id="icsInput" accept=".ics" onchange="loadICS(event)">
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     LEGENDA
-     ═══════════════════════════════════════════════════ -->
+<!-- ═══ LEGEND ═══ -->
 <div class="legend">
   <div class="legend-item"><div class="legend-swatch swatch-available"></div> Disponibile</div>
   <div class="legend-item"><div class="legend-swatch swatch-sw"></div> Smart Working</div>
@@ -587,14 +540,10 @@
   <div class="legend-item"><div class="legend-swatch swatch-holiday"></div> Festivo</div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     CALENDARIO
-     ═══════════════════════════════════════════════════ -->
+<!-- ═══ CALENDARIO ═══ -->
 <div class="months-container" id="calendar"></div>
 
-<!-- ═══════════════════════════════════════════════════
-     ISTRUZIONI
-     ═══════════════════════════════════════════════════ -->
+<!-- ═══ ISTRUZIONI ═══ -->
 <div class="instructions">
   <details>
     <summary>Come usare il tracker</summary>
@@ -602,9 +551,60 @@
       <p><strong>Click singolo</strong> su un giorno per ciclare tra i 3 stati:</p>
       <p>◻️ Vuoto → 🟦 <strong>Smart Working</strong> → 🟧 <strong>Ferie</strong> → ◻️ Vuoto</p>
       <p>I contatori in alto si aggiornano automaticamente. Imposta i massimali SW e Ferie nei campi editabili. Il badge "residui" diventa <span style="color:var(--red);font-weight:700;">rosso</span> quando superi il limite.</p>
-      <p>Usa <strong>Salva CSV</strong> per esportare e <strong>Carica CSV</strong> per ripristinare i dati.</p>
     </div>
   </details>
+
+  <details>
+    <summary>Cosa sono i file CSV e ICS? A cosa servono?</summary>
+    <div class="content">
+      <div class="tip-box">
+        <strong>📊 CSV — il salvataggio dei dati</strong><br>
+        Semplice file di testo con l'elenco di tutti i giorni e il loro stato (vuoto, SW, Ferie). Serve per <strong>salvare e ricaricare</strong> il tuo lavoro nel tracker. Puoi anche aprirlo con Excel o Google Sheets.
+      </div>
+      <div class="tip-box" style="border-left-color: var(--ferie-bg);">
+        <strong>📅 ICS — l'esportazione verso il calendario</strong><br>
+        Formato standard riconosciuto da Google Calendar, Apple Calendar e Outlook. Importando il file .ics vedrai le giornate SW e Ferie direttamente nel tuo calendario come eventi.
+      </div>
+      <p><strong>In pratica:</strong></p>
+      <ol>
+        <li><strong>Salva CSV</strong> → per conservare i dati e ricaricarli in questa pagina</li>
+        <li><strong>Esporta .ics</strong> → per vedere SW e Ferie nel tuo calendario</li>
+        <li><strong>Carica .ics</strong> → per reimportare un file .ics nel tracker (utile se hai solo il file calendario)</li>
+      </ol>
+    </div>
+  </details>
+
+  <details>
+    <summary>Come sincronizzare con Google Calendar (e aggiornarlo)</summary>
+    <div class="content">
+      <div class="tip-box warn">
+        <strong>⚠️ Importante:</strong> Google Calendar non "aggiorna" gli eventi importati — li aggiunge e basta. Se re-importi dopo aver modificato il tracker, rischi di avere <strong>eventi duplicati</strong>. Per evitarlo, segui la procedura sotto.
+      </div>
+
+      <p><strong>Prima volta — Setup iniziale:</strong></p>
+      <ol>
+        <li>In Google Calendar, crea un <strong>nuovo calendario dedicato</strong>:
+          clicca il <strong>+</strong> accanto a "Altri calendari" → "Crea nuovo calendario" → chiamalo ad es. <code>SW & Ferie</code></li>
+        <li>Nel tracker clicca <strong>Esporta .ics</strong> e salva il file</li>
+        <li>In Google Calendar: ⚙️ → <strong>Impostazioni</strong> → <strong>Importa ed esporta</strong> → <strong>Importa</strong></li>
+        <li>Seleziona il file .ics e come destinazione scegli il calendario <code>SW & Ferie</code></li>
+        <li>Clicca <strong>Importa</strong> — gli eventi appariranno nel calendario</li>
+      </ol>
+
+      <p><strong>Aggiornamento — Quando modifichi il tracker:</strong></p>
+      <ol>
+        <li>In Google Calendar, vai nel calendario <code>SW & Ferie</code></li>
+        <li>Clicca i <strong>tre puntini</strong> accanto al nome → <strong>Impostazioni</strong></li>
+        <li>Scorri in fondo e clicca <strong>Elimina</strong> (elimina solo gli eventi, non l'account)</li>
+        <li>Ricrea il calendario <code>SW & Ferie</code> e re-importa il nuovo file .ics</li>
+      </ol>
+
+      <div class="tip-box">
+        <strong>💡 Suggerimento:</strong> il metodo più comodo è usare il <strong>CSV per il salvataggio quotidiano</strong> (è istantaneo), e aggiornare Google Calendar solo quando serve davvero, ad esempio a inizio mese. Il calendario dedicato rende semplicissimo cancellare e reimportare tutto in 30 secondi.
+      </div>
+    </div>
+  </details>
+
   <details>
     <summary>Come modificare i giorni festivi nel codice HTML</summary>
     <div class="content">
@@ -637,6 +637,10 @@ const HOLIDAYS = {
 
 <div class="toast" id="toast"></div>
 
+<!-- ═══ GOATCOUNTER ═══ -->
+<script data-goatcounter="https://fc-smartworking.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
 <script>
 // ══════════════════════════════════════════════════════════════
 // GIORNI FESTIVI — Modifica qui per aggiungere/rimuovere festività
@@ -653,10 +657,7 @@ const HOLIDAYS = {
   // '2026-12-07': 'Sant\'Ambrogio (Milano)',
 };
 
-// Stati: 0 = vuoto, 1 = Smart Working, 2 = Ferie
-const STATE_EMPTY = 0;
-const STATE_SW = 1;
-const STATE_FERIE = 2;
+const STATE_EMPTY = 0, STATE_SW = 1, STATE_FERIE = 2;
 
 const MONTHS = [
   { name: 'Marzo',  year: 2026, month: 2 },
@@ -666,21 +667,18 @@ const MONTHS = [
 ];
 const WEEKDAYS = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven'];
 const CSV_FILENAME = 'smart_working_2026.csv';
+const ICS_FILENAME = 'smart_working_2026.ics';
 
 function dateKey(year, month, day) {
   return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 }
-
-function isHoliday(key) {
-  return HOLIDAYS.hasOwnProperty(key);
-}
+function isHoliday(key) { return HOLIDAYS.hasOwnProperty(key); }
 
 function getWorkingDays(year, month) {
   const days = [];
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  for (let d = 1; d <= daysInMonth; d++) {
-    const date = new Date(year, month, d);
-    const dow = date.getDay();
+  const dim = new Date(year, month + 1, 0).getDate();
+  for (let d = 1; d <= dim; d++) {
+    const dow = new Date(year, month, d).getDay();
     if (dow >= 1 && dow <= 5) {
       const key = dateKey(year, month, d);
       days.push({ day: d, dow, holiday: isHoliday(key) });
@@ -689,27 +687,20 @@ function getWorkingDays(year, month) {
   return days;
 }
 
-/* ── Cycle state on click ── */
 function cycleState(key) {
   const btn = document.getElementById(key);
   if (!btn) return;
-  let state = parseInt(btn.dataset.state) || 0;
-  state = (state + 1) % 3;
-  btn.dataset.state = state;
+  btn.dataset.state = ((parseInt(btn.dataset.state) || 0) + 1) % 3;
   updateCount();
 }
 
 function buildCalendar() {
   const container = document.getElementById('calendar');
   container.innerHTML = '';
-
   MONTHS.forEach(m => {
     const workDays = getWorkingDays(m.year, m.month);
-    const checkableDays = workDays.filter(d => !d.holiday).length;
     const card = document.createElement('div');
     card.className = 'month-card';
-    card.dataset.month = m.month;
-
     card.innerHTML = `
       <div class="month-header">
         <h2>${m.name} ${m.year}</h2>
@@ -718,34 +709,21 @@ function buildCalendar() {
           <span class="month-count ferie-count" id="mc-fe-${m.month}">F 0</span>
         </div>
       </div>
-      <div class="weekday-header">
-        ${WEEKDAYS.map(w => `<span>${w}</span>`).join('')}
-      </div>`;
-
+      <div class="weekday-header">${WEEKDAYS.map(w => `<span>${w}</span>`).join('')}</div>`;
     const grid = document.createElement('div');
     grid.className = 'days-grid';
-
-    const daysInMonth = new Date(m.year, m.month + 1, 0).getDate();
-    let weekStarted = false;
-
-    for (let d = 1; d <= daysInMonth; d++) {
-      const date = new Date(m.year, m.month, d);
-      const dow = date.getDay();
+    const dim = new Date(m.year, m.month + 1, 0).getDate();
+    let started = false;
+    for (let d = 1; d <= dim; d++) {
+      const dow = new Date(m.year, m.month, d).getDay();
       if (dow === 0 || dow === 6) continue;
-
-      if (!weekStarted) {
-        for (let e = 1; e < dow; e++) {
-          const empty = document.createElement('div');
-          empty.className = 'day-cell empty';
-          grid.appendChild(empty);
-        }
-        weekStarted = true;
+      if (!started) {
+        for (let e = 1; e < dow; e++) { const c = document.createElement('div'); c.className = 'day-cell empty'; grid.appendChild(c); }
+        started = true;
       }
-
       const key = dateKey(m.year, m.month, d);
       const cell = document.createElement('div');
       cell.className = 'day-cell';
-
       if (isHoliday(key)) {
         cell.classList.add('holiday');
         cell.innerHTML = `<div class="day-btn" title="${HOLIDAYS[key]}">${d}</div>`;
@@ -753,166 +731,93 @@ function buildCalendar() {
         cell.innerHTML = `<div class="day-btn" id="${key}" data-state="0" onclick="cycleState('${key}')">${d}</div>`;
       }
       grid.appendChild(cell);
-
       if (dow < 5) {
-        const nextDay = d + 1;
-        const nextDate = new Date(m.year, m.month, nextDay);
-        if (nextDay > daysInMonth || nextDate.getDay() === 0 || nextDate.getDay() === 6) {
-          for (let e = dow + 1; e <= 5; e++) {
-            const empty = document.createElement('div');
-            empty.className = 'day-cell empty';
-            grid.appendChild(empty);
-          }
+        const nd = new Date(m.year, m.month, d + 1);
+        if (d + 1 > dim || nd.getDay() === 0 || nd.getDay() === 6) {
+          for (let e = dow + 1; e <= 5; e++) { const c = document.createElement('div'); c.className = 'day-cell empty'; grid.appendChild(c); }
         }
       }
     }
-
     card.appendChild(grid);
     container.appendChild(card);
   });
-
   updateCount();
 }
 
 function updateCount() {
-  let totalSW = 0;
-  let totalFerie = 0;
-  let totalWorkdays = 0;
-
+  let totalSW = 0, totalFerie = 0, totalWork = 0;
   MONTHS.forEach(m => {
-    const workDays = getWorkingDays(m.year, m.month);
-    const checkable = workDays.filter(d => !d.holiday);
-    totalWorkdays += checkable.length;
-    let monthSW = 0;
-    let monthFerie = 0;
-
-    checkable.forEach(wd => {
-      const key = dateKey(m.year, m.month, wd.day);
-      const btn = document.getElementById(key);
+    const ck = getWorkingDays(m.year, m.month).filter(d => !d.holiday);
+    totalWork += ck.length;
+    let mSW = 0, mF = 0;
+    ck.forEach(wd => {
+      const btn = document.getElementById(dateKey(m.year, m.month, wd.day));
       if (!btn) return;
-      const state = parseInt(btn.dataset.state) || 0;
-      if (state === STATE_SW) monthSW++;
-      if (state === STATE_FERIE) monthFerie++;
+      const s = parseInt(btn.dataset.state) || 0;
+      if (s === 1) mSW++; if (s === 2) mF++;
     });
-
-    totalSW += monthSW;
-    totalFerie += monthFerie;
-
-    const badgeSW = document.getElementById(`mc-sw-${m.month}`);
-    const badgeFE = document.getElementById(`mc-fe-${m.month}`);
-    if (badgeSW) badgeSW.textContent = `SW ${monthSW}`;
-    if (badgeFE) badgeFE.textContent = `F ${monthFerie}`;
+    totalSW += mSW; totalFerie += mF;
+    const bSW = document.getElementById(`mc-sw-${m.month}`);
+    const bFE = document.getElementById(`mc-fe-${m.month}`);
+    if (bSW) bSW.textContent = `SW ${mSW}`;
+    if (bFE) bFE.textContent = `F ${mF}`;
   });
-
   document.getElementById('swCount').textContent = totalSW;
   document.getElementById('ferieCount').textContent = totalFerie;
-  document.getElementById('totalWorkdays').textContent = totalWorkdays;
+  document.getElementById('totalWorkdays').textContent = totalWork;
 
-  // SW residual
   const maxSW = parseInt(document.getElementById('maxSW').value) || 0;
-  const swResidual = maxSW - totalSW;
-  document.getElementById('swResidual').textContent = swResidual;
-  const swBadge = document.getElementById('swResidualBadge');
-  swBadge.classList.toggle('negative', swResidual < 0);
+  const rSW = maxSW - totalSW;
+  document.getElementById('swResidual').textContent = rSW;
+  document.getElementById('swResidualBadge').classList.toggle('negative', rSW < 0);
 
-  // Ferie residual
-  const maxFerie = parseInt(document.getElementById('maxFerie').value) || 0;
-  const ferieResidual = maxFerie - totalFerie;
-  document.getElementById('ferieResidual').textContent = ferieResidual;
-  const ferieBadge = document.getElementById('ferieResidualBadge');
-  if (ferieResidual < 0) {
-    ferieBadge.classList.add('negative');
-    ferieBadge.classList.remove('ferie-badge');
-  } else {
-    ferieBadge.classList.remove('negative');
-    ferieBadge.classList.add('ferie-badge');
-  }
+  const maxF = parseInt(document.getElementById('maxFerie').value) || 0;
+  const rF = maxF - totalFerie;
+  document.getElementById('ferieResidual').textContent = rF;
+  const fb = document.getElementById('ferieResidualBadge');
+  if (rF < 0) { fb.classList.add('negative'); fb.classList.remove('ferie-badge'); }
+  else { fb.classList.remove('negative'); fb.classList.add('ferie-badge'); }
 }
 
-/* ═══════════════════════════════════════════════════════
-   CSV SAVE
-   ═══════════════════════════════════════════════════════ */
+/* ═══ CSV SAVE ═══ */
 async function saveCSV() {
-  const maxSW = document.getElementById('maxSW').value;
-  const maxFerie = document.getElementById('maxFerie').value;
   const giorni = ['', 'Lunedi', 'Martedi', 'Mercoledi', 'Giovedi', 'Venerdi'];
-  const stati = ['', 'SW', 'Ferie'];
-
-  let csv = `#MaxSW=${maxSW}\n#MaxFerie=${maxFerie}\nData,Giorno,Stato\n`;
-
+  let csv = `#MaxSW=${document.getElementById('maxSW').value}\n#MaxFerie=${document.getElementById('maxFerie').value}\nData,Giorno,Stato\n`;
   MONTHS.forEach(m => {
-    const workDays = getWorkingDays(m.year, m.month);
-    workDays.forEach(wd => {
+    getWorkingDays(m.year, m.month).forEach(wd => {
       if (wd.holiday) return;
       const key = dateKey(m.year, m.month, wd.day);
       const btn = document.getElementById(key);
-      const state = btn ? parseInt(btn.dataset.state) || 0 : 0;
-      csv += `${key},${giorni[wd.dow]},${state}\n`;
+      csv += `${key},${giorni[wd.dow]},${btn ? parseInt(btn.dataset.state) || 0 : 0}\n`;
     });
   });
-
   if (window.showSaveFilePicker) {
     try {
-      const handle = await window.showSaveFilePicker({
-        suggestedName: CSV_FILENAME,
-        types: [{ description: 'File CSV', accept: { 'text/csv': ['.csv'] } }]
-      });
-      const writable = await handle.createWritable();
-      await writable.write(csv);
-      await writable.close();
-      showToast('CSV salvato con successo \u2713');
-      return;
-    } catch (e) {
-      if (e.name === 'AbortError') return;
-    }
+      const h = await window.showSaveFilePicker({ suggestedName: CSV_FILENAME, types: [{ description: 'File CSV', accept: { 'text/csv': ['.csv'] } }] });
+      const w = await h.createWritable(); await w.write(csv); await w.close();
+      showToast('CSV salvato con successo \u2713'); return;
+    } catch (e) { if (e.name === 'AbortError') return; }
   }
-
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = CSV_FILENAME;
-  link.click();
-  URL.revokeObjectURL(link.href);
+  download(csv, CSV_FILENAME, 'text/csv;charset=utf-8;');
   showToast('CSV scaricato nella cartella Download \u2713');
 }
 
-/* ── CSV LOAD ── */
+/* ═══ CSV LOAD ═══ */
 function loadCSV(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
+  const file = event.target.files[0]; if (!file) return;
   const reader = new FileReader();
   reader.onload = function(e) {
-    const lines = e.target.result.split('\n');
     let loaded = 0;
-
-    lines.forEach(line => {
-      const trimmed = line.trim();
-      if (trimmed.startsWith('#MaxSW=')) {
-        const val = parseInt(trimmed.replace('#MaxSW=', ''));
-        if (!isNaN(val)) document.getElementById('maxSW').value = val;
-        return;
-      }
-      if (trimmed.startsWith('#MaxFerie=')) {
-        const val = parseInt(trimmed.replace('#MaxFerie=', ''));
-        if (!isNaN(val)) document.getElementById('maxFerie').value = val;
-        return;
-      }
-      const parts = trimmed.split(',');
-      if (parts.length >= 3 && parts[0] !== 'Data') {
-        const key = parts[0];
-        let state = parseInt(parts[2]);
-        // Retrocompatibilità: il vecchio CSV usava "SmartWorking" con 0/1
-        // Il nuovo usa "Stato" con 0/1/2
-        if (isNaN(state)) state = 0;
-        const btn = document.getElementById(key);
-        if (btn) {
-          btn.dataset.state = state;
-          loaded++;
-        }
+    e.target.result.split('\n').forEach(line => {
+      const t = line.trim();
+      if (t.startsWith('#MaxSW=')) { const v = parseInt(t.split('=')[1]); if (!isNaN(v)) document.getElementById('maxSW').value = v; return; }
+      if (t.startsWith('#MaxFerie=')) { const v = parseInt(t.split('=')[1]); if (!isNaN(v)) document.getElementById('maxFerie').value = v; return; }
+      const p = t.split(',');
+      if (p.length >= 3 && p[0] !== 'Data') {
+        const btn = document.getElementById(p[0]);
+        if (btn) { btn.dataset.state = parseInt(p[2]) || 0; loaded++; }
       }
     });
-
     updateCount();
     showToast(`CSV caricato \u2014 ${loaded} giorni ripristinati \u2713`);
   };
@@ -920,17 +825,121 @@ function loadCSV(event) {
   event.target.value = '';
 }
 
-/* ── CLEAR ── */
+/* ═══ ICS EXPORT ═══ */
+function exportICS() {
+  const events = [];
+  const labels = { 1: 'Smart Working', 2: 'Ferie' };
+  const emoji = { 1: '\uD83D\uDCBB', 2: '\u2600\uFE0F' };
+
+  MONTHS.forEach(m => {
+    getWorkingDays(m.year, m.month).forEach(wd => {
+      if (wd.holiday) return;
+      const key = dateKey(m.year, m.month, wd.day);
+      const btn = document.getElementById(key);
+      if (!btn) return;
+      const state = parseInt(btn.dataset.state) || 0;
+      if (state === 0) return;
+
+      const dtStart = key.replace(/-/g, '');
+      const nd = new Date(m.year, m.month, wd.day + 1);
+      const dtEnd = `${nd.getFullYear()}${String(nd.getMonth()+1).padStart(2,'0')}${String(nd.getDate()).padStart(2,'0')}`;
+
+      events.push(
+        'BEGIN:VEVENT\r\n' +
+        `DTSTART;VALUE=DATE:${dtStart}\r\n` +
+        `DTEND;VALUE=DATE:${dtEnd}\r\n` +
+        `SUMMARY:${emoji[state]} ${labels[state]}\r\n` +
+        `UID:${key}-sw-tracker@fc\r\n` +
+        `DTSTAMP:${icsNow()}\r\n` +
+        'TRANSP:TRANSPARENT\r\n' +
+        'END:VEVENT'
+      );
+    });
+  });
+
+  if (events.length === 0) { showToast('Nessun giorno selezionato da esportare'); return; }
+
+  const ics =
+    'BEGIN:VCALENDAR\r\n' +
+    'VERSION:2.0\r\n' +
+    'PRODID:-//FC//Smart Working Tracker//IT\r\n' +
+    'CALSCALE:GREGORIAN\r\n' +
+    'METHOD:PUBLISH\r\n' +
+    'X-WR-CALNAME:Smart Working & Ferie 2026\r\n' +
+    events.join('\r\n') + '\r\n' +
+    'END:VCALENDAR';
+
+  download(ics, ICS_FILENAME, 'text/calendar;charset=utf-8');
+  showToast(`Calendario esportato \u2014 ${events.length} eventi \u2713`);
+}
+
+/* ═══ ICS LOAD (IMPORT) ═══ */
+function loadICS(event) {
+  const file = event.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    let loaded = 0;
+
+    // Prima azzera tutto
+    document.querySelectorAll('.day-btn[data-state]').forEach(btn => { btn.dataset.state = 0; });
+
+    // Parsing semplice del formato ICS
+    const eventBlocks = text.split('BEGIN:VEVENT');
+    eventBlocks.forEach(block => {
+      // Estrai DTSTART
+      const dtMatch = block.match(/DTSTART;VALUE=DATE:(\d{4})(\d{2})(\d{2})/);
+      if (!dtMatch) return;
+      const key = `${dtMatch[1]}-${dtMatch[2]}-${dtMatch[3]}`;
+
+      // Estrai SUMMARY per capire se SW o Ferie
+      const sumMatch = block.match(/SUMMARY:(.+)/);
+      if (!sumMatch) return;
+      const summary = sumMatch[1].trim();
+
+      let state = 0;
+      if (summary.includes('Smart Working') || summary.includes('SW')) state = STATE_SW;
+      else if (summary.includes('Ferie') || summary.includes('Ferie')) state = STATE_FERIE;
+
+      if (state === 0) return;
+
+      const btn = document.getElementById(key);
+      if (btn) {
+        btn.dataset.state = state;
+        loaded++;
+      }
+    });
+
+    updateCount();
+    showToast(`ICS importato \u2014 ${loaded} eventi ripristinati \u2713`);
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+/* ═══ UTILITIES ═══ */
+function download(content, filename, mime) {
+  const blob = new Blob([content], { type: mime });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = filename;
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+
+function icsNow() {
+  const n = new Date();
+  return n.getFullYear() + String(n.getMonth()+1).padStart(2,'0') + String(n.getDate()).padStart(2,'0') +
+    'T' + String(n.getHours()).padStart(2,'0') + String(n.getMinutes()).padStart(2,'0') + String(n.getSeconds()).padStart(2,'0') + 'Z';
+}
+
 function clearAll() {
   if (!confirm('Vuoi davvero cancellare tutte le selezioni?')) return;
-  document.querySelectorAll('.day-btn[data-state]').forEach(btn => {
-    btn.dataset.state = 0;
-  });
+  document.querySelectorAll('.day-btn[data-state]').forEach(btn => { btn.dataset.state = 0; });
   updateCount();
   showToast('Tutte le selezioni rimosse');
 }
 
-/* ── TOAST ── */
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
