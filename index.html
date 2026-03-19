@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Working Tracker — Mar–Giu 2026</title>
+<title>Smart Working Tracker — Mar–Ago 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -164,6 +164,8 @@
   .month-card:nth-child(2) { animation-delay: 0.08s; }
   .month-card:nth-child(3) { animation-delay: 0.16s; }
   .month-card:nth-child(4) { animation-delay: 0.24s; }
+  .month-card:nth-child(5) { animation-delay: 0.32s; }
+  .month-card:nth-child(6) { animation-delay: 0.40s; }
   .month-card:hover { box-shadow: var(--shadow-lg); }
   .month-header {
     padding: 18px 22px 14px; display: flex;
@@ -334,7 +336,7 @@
 
 <header>
   <h1>Smart Working Tracker</h1>
-  <p>Marzo – Giugno 2026 &nbsp;·&nbsp; click per ciclare: vuoto → SW → Ferie → vuoto</p>
+  <p>Marzo – Agosto 2026 &nbsp;·&nbsp; click per ciclare: vuoto → SW → Ferie → vuoto</p>
 </header>
 
 <div class="counter-bar">
@@ -597,6 +599,7 @@ const HOLIDAYS = {
   '2026-04-25': 'Festa della Liberazione',
   '2026-05-01': 'Festa dei Lavoratori',
   '2026-06-02': 'Festa della Repubblica',
+  '2026-08-15': 'Ferragosto',
   // ── Patroni — decommenta o aggiungi il tuo: ──
   // '2026-06-24': 'San Giovanni (Torino)',
   // '2026-06-29': 'Santi Pietro e Paolo (Roma)',
@@ -606,10 +609,12 @@ const HOLIDAYS = {
 const STATE_EMPTY = 0, STATE_SW = 1, STATE_FERIE = 2;
 
 const MONTHS = [
-  { name: 'Marzo',  year: 2026, month: 2 },
-  { name: 'Aprile', year: 2026, month: 3 },
-  { name: 'Maggio', year: 2026, month: 4 },
-  { name: 'Giugno', year: 2026, month: 5 }
+  { name: 'Marzo',   year: 2026, month: 2 },
+  { name: 'Aprile',  year: 2026, month: 3 },
+  { name: 'Maggio',  year: 2026, month: 4 },
+  { name: 'Giugno',  year: 2026, month: 5 },
+  { name: 'Luglio',  year: 2026, month: 6 },
+  { name: 'Agosto',  year: 2026, month: 7 }
 ];
 const WEEKDAYS = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven'];
 const CSV_FILENAME = 'smart_working_2026.csv';
